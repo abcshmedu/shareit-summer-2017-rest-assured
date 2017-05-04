@@ -63,7 +63,7 @@ public class ValidatorTest {
 	
 	@Test 
 	public void barcodeWithLettersTest() {
-		actAndAssertBarcode("12345bc89", false);
+		actAndAssertBarcode("12345bc8", false);
 	}
 	
 	@Test 
@@ -87,7 +87,17 @@ public class ValidatorTest {
 	}
 	
 	@Test 
+	public void anotherValidBarcodeTest() {
+		actAndAssertBarcode("7501054530107", true);
+	}
+	
+	@Test 
 	public void randomBarcodeTest() {
 		actAndAssertBarcode("1234567890123", false);
+	}
+	
+	@Test 
+	public void barcodeNullTest() {
+		actAndAssertBarcode(null, false);
 	}
 }
