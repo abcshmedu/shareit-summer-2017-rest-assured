@@ -16,7 +16,6 @@ import edu.hm.shareit.media.Medium;
  */
 public class MediaServiceImpl implements MediaService {
 
-
     @Override
     public MediaServiceResult addBook(Book book) {
         return null;
