@@ -10,50 +10,84 @@ public class ValidatorTest {
 
 	@Test
 	public void isbnNullTest() {
-		actAndAssert(null, false);
+		actAndAssertIsbn(null, false);
 	}
 
 	@Test
 	public void isbnTooShortTest() {
-		actAndAssert("123456789", false);
+		actAndAssertIsbn("123456789", false);
 	}
 	
 	@Test
 	public void isbnTooLongTest() {
-		actAndAssert("12345678901234", false);
+		actAndAssertIsbn("12345678901234", false);
 	}
 	
 	@Test
 	public void isbnRandomIsbnTest() {
-		actAndAssert("1234567890123", false);
+		actAndAssertIsbn("1234567890123", false);
 	}
 	
 	@Test
 	public void anotherRandomIsbnTest() {
-		actAndAssert("934-1293-498-276", false);
+		actAndAssertIsbn("934-1293-498-276", false);
 	}
 	
 	@Test
 	public void validIsbnTest() {
-		actAndAssert("978-3426521083", true);
+		actAndAssertIsbn("978-3426521083", true);
 	}
 	
 	@Test
 	public void anotherValidIsbnTest() {
-		actAndAssert("978-3453435797", true);
+		actAndAssertIsbn("978-3453435797", true);
 	}
 	
 	@Test
 	public void isbnMod10Test() {
-		actAndAssert("2121212121210", true);
+		actAndAssertIsbn("2121212121210", true);
 	}
 	
 	@Test
 	public void isbnWithLettersTest() {
-		actAndAssert("978-34ab521083", false);
+		actAndAssertIsbn("978-34ab521083", false);
 	}
 	
-	private void actAndAssert(String isbn, boolean expectedResult) {
+	private void actAndAssertIsbn(String isbn, boolean expectedResult) {
 		assertEquals(expectedResult, Validator.isValidIsbn(isbn));
+	}
+	
+	private void actAndAssertBarcode(String barcode, boolean expectedResult) {
+		assertEquals(expectedResult, Validator.isValidBarcode(barcode));
+	}
+	
+	@Test 
+	public void barcodeWithLettersTest() {
+		actAndAssertBarcode("12345bc89", false);
+	}
+	
+	@Test 
+	public void barcode8Test() {
+		actAndAssertBarcode("12345678", false);
+	}
+	
+	@Test 
+	public void barcodeTooShortTest() {
+		actAndAssertBarcode("01234", false);
+	}
+	
+	@Test 
+	public void barcodeTooLongTest() {
+		actAndAssertBarcode("12345678901234", false);
+	}
+	
+	@Test 
+	public void validBarcodeTest() {
+		actAndAssertBarcode("7501031311309", true);
+	}
+	
+	@Test 
+	public void randomBarcodeTest() {
+		actAndAssertBarcode("1234567890123", false);
 	}
 }

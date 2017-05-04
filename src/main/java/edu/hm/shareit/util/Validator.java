@@ -61,6 +61,62 @@ public abstract class Validator {
     }
 
     public static boolean isValidBarcode(String barcode) {
-        return false;
+    	// Check if only digits
+    	String ValidChars = "0123456789";
+    	for (int i = 0; i < barcode.length(); i++) {
+    		char digit = barcode.charAt(i);
+    		if (ValidChars.indexOf(digit) == -1) {
+		    	return false;
+    		}
+    	}
+    	// Add five 0 if the code has only 8 digits
+    	if (barcode.length() == 8 ) {
+	    	barcode = "00000" + barcode;
+    	}
+    	// Check for 13 digits otherwise
+    	else if (barcode.length() != 13) {
+	    	return false;
+    	}
+    	
+    	// Get the check number
+    	int originalCheck = Integer.parseInt(barcode.substring(barcode.length() - 1));
+    	barcode = barcode.substring(0, barcode.length() - 1);
+    	
+    	// Add even numbers together
+    	int even = Integer.parseInt(barcode.substring(1, 2)) +
+    			Integer.parseInt(barcode.substring(3, 4)) +
+    			Integer.parseInt(barcode.substring(5, 6)) +
+    			Integer.parseInt(barcode.substring(7, 8)) +
+    			Integer.parseInt(barcode.substring(9, 10)) +
+    			Integer.parseInt(barcode.substring(11, 12));
+
+    	// Multiply this result by 3
+    	even *= 3;
+    	
+    	// Add odd numbers together
+    	int odd = Integer.parseInt(barcode.substring(0, 1)) +
+    			Integer.parseInt(barcode.substring(2, 3)) +
+    			Integer.parseInt(barcode.substring(4, 5)) +
+    			Integer.parseInt(barcode.substring(6, 7)) +
+    			Integer.parseInt(barcode.substring(8, 9)) +
+    			Integer.parseInt(barcode.substring(10, 11));
+    	
+    	// Add two totals together
+    	int total = even + odd;
+
+    	// Calculate the checksum
+    	// Divide total by 10 and store the remainder
+    	int checksum = total % 10;
+    	// If result is not 0 then take away 10
+    	 if (checksum != 0) {
+    		 checksum = 10 - checksum;
+    	}
+
+    	// Return the result
+    	if (checksum != originalCheck) {
+    		return false;
+    	}
+    	
+    	return true;
     }
 }
