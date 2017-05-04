@@ -64,6 +64,9 @@ public abstract class Validator {
      * Checks if a given EAN-13 barcode is valid.
      * @param barcode an EAN-13 barcode 
      * @return true if the barcode is valid
+     * 
+     * source: http://www.logikdev.com/2010/05/13/validate-your-ean-barcode/
+     * (but modified some parts)
      */
     public static boolean isValidBarcode(String barcode) {
     	if(barcode == null) {
