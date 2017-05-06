@@ -23,10 +23,6 @@ public class MediaServiceImpl implements MediaService {
 
     private final MediaStorage mediaStorage = new MediaStorage();
     
-    public MediaStorage getMediaStorage() {
-		return mediaStorage;
-	}
-
 	@Override
     public MediaServiceResult addBook(Book book) {
     	if(book.getTitle().equals("")) {
@@ -47,7 +43,20 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult addDisc(Disc disc) {
-        return null;
+    	if(disc.getTitle().equals("")) {
+    		return MediaServiceResult.MISSING_TITLE;
+    	}
+    	if(disc.getDirector().equals("")) {
+    		return MediaServiceResult.MISSING_DIRECTOR;
+    	}
+    	if(!Validator.isValidBarcode(disc.getBarcode())) {
+    		return MediaServiceResult.INVALID_BARCODE;
+    	}
+        if(mediaStorage.containsDisc(disc.getBarcode())) {
+            return MediaServiceResult.BARCODE_ALREADY_IN_USE;
+        }
+        mediaStorage.addDisc(disc);
+        return MediaServiceResult.OK;
     }
 
     @Override
@@ -58,7 +67,8 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium[] getDiscs() {
-        return new Medium[0];
+        List<Disc> discList = mediaStorage.getDiscs();
+        return discList.toArray(new Medium[discList.size()]);
     }
 
     @Override
@@ -74,7 +84,13 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium getDisc(String barcode) {
-        return null;
+    	if(!Validator.isValidBarcode(barcode)) {
+    		return null;
+    	}
+    	if(mediaStorage.containsDisc(barcode)) {
+    		return mediaStorage.getDisc(barcode);
+    	}
+    	return null;
     }
 
     @Override
@@ -98,6 +114,20 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult updateDisc(Disc disc) {
-        return null;
+    	if(disc.getTitle().equals("")) {
+    		return MediaServiceResult.MISSING_TITLE;
+    	}
+    	if(disc.getDirector().equals("")) {
+    		return MediaServiceResult.MISSING_DIRECTOR;
+    	}
+    	if(!Validator.isValidBarcode(disc.getBarcode())) {
+    		return MediaServiceResult.INVALID_BARCODE;
+    	}
+    	if(mediaStorage.containsDisc(disc.getBarcode())) {
+    		mediaStorage.removeDisc(disc.getBarcode());
+    		mediaStorage.addDisc(disc);
+    		return MediaServiceResult.OK;
+    	}
+    	return MediaServiceResult.BARCODE_NOT_FOUND;
     }
 }

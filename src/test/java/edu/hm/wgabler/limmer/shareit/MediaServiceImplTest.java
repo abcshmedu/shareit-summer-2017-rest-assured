@@ -23,9 +23,6 @@ public class MediaServiceImplTest {
 	public void addBookTest() {
 		MediaServiceImpl service = new MediaServiceImpl();
 		assertEquals(MediaServiceResult.OK, service.addBook(stdBook));
-		MediaStorage exp = new MediaStorage();
-		exp.addBook(stdBook);
-		assertEquals(exp, service.getMediaStorage());
 	}
 	
 	@Test
@@ -99,7 +96,7 @@ public class MediaServiceImplTest {
 	
 	
 	@Test
-	public void updateBookEmptyBookTest() {
+	public void updateBookEmptyTest() {
 		MediaServiceImpl service = new MediaServiceImpl();
 		assertEquals(MediaServiceResult.MISSING_TITLE, service.updateBook(new Book()));		
 	}
@@ -129,4 +126,117 @@ public class MediaServiceImplTest {
 		assertEquals(MediaServiceResult.OK, service.updateBook(new Book("New", "New Author", stdBook.getIsbn())));
 	}
 	
+	
+	
+	
+	// Discs
+	
+	
+	@Test
+	public void addDiscTest() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.OK, service.addDisc(stdDisc));
+	}
+	
+	@Test
+	public void addEmptyDiscTest() {
+		MediaService service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.MISSING_TITLE, service.addDisc(new Disc()));		
+	}
+
+	@Test
+	public void addDiscWithoutDirectorTest() {
+		MediaService service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.MISSING_DIRECTOR, service.addDisc(new Disc("Title", "123", "", 0)));		
+	}
+	
+	@Test
+	public void addDiscInvalidBarcodeTest() {
+		MediaService service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.INVALID_BARCODE, service.addDisc(new Disc("Title", "123", "Director", 0)));		
+	}
+	
+	@Test
+	public void addDiscAlreadyInUseTest() {
+		MediaService service = new MediaServiceImpl();
+		service.addDisc(stdDisc);
+		assertEquals(MediaServiceResult.BARCODE_ALREADY_IN_USE, service.addDisc(stdDisc));		
+	}
+
+	
+	@Test
+	public void getDiscsTest() {
+		MediaService service = new MediaServiceImpl();
+		service.addDisc(stdDisc);
+		service.addDisc(otherDisc);
+		Medium[] array = new Disc[] {stdDisc, otherDisc};
+		assertArrayEquals(array, service.getDiscs());
+	}
+	
+	@Test
+	public void getDiscsEmptyTest() {
+		MediaService service = new MediaServiceImpl();
+		Medium[] array = new Disc[0];
+		assertArrayEquals(array, service.getDiscs());
+	}
+	
+	@Test
+	public void getDiscInvalidBarcodeTest() {
+		MediaService service = new MediaServiceImpl();
+		service.addDisc(stdDisc);
+		assertEquals(null, service.getDisc("123"));		
+	}
+	
+	@Test
+	public void getDiscNotAvailableTest() {
+		MediaService service = new MediaServiceImpl();
+		service.addDisc(stdDisc);
+		assertEquals(null, service.getDisc(otherDisc.getBarcode()));		
+	}
+	
+	@Test
+	public void getDiscTest() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		service.addDisc(stdDisc);
+		assertEquals(stdDisc, service.getDisc(stdDisc.getBarcode()));		
+	}
+	
+	@Test
+	public void getDiscTest2() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		service.addDisc(otherDisc);
+		assertEquals(otherDisc, service.getDisc(otherDisc.getBarcode()));		
+	}
+	
+	
+	@Test
+	public void updateDiscEmptyTest() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.MISSING_TITLE, service.updateDisc(new Disc()));		
+	}
+	
+	@Test
+	public void updateDiscMissingDirectorTest() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.MISSING_DIRECTOR, service.updateDisc(new Disc("Title", "1234", "", 0)));		
+	}
+	
+	@Test
+	public void updateDiscInvalidBarcodeTest() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.INVALID_BARCODE, service.updateDisc(new Disc("Title", "1234", "Director", 0)));		
+	}
+	
+	@Test
+	public void updateDiscBarcodeNotFoundTest() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		assertEquals(MediaServiceResult.BARCODE_NOT_FOUND, service.updateDisc(new Disc("Title", stdDisc.getBarcode(), "Director", 0)));		
+	}
+	
+	@Test
+	public void updateDiscTest() {
+		MediaServiceImpl service = new MediaServiceImpl();
+		service.addDisc(stdDisc);		
+		assertEquals(MediaServiceResult.OK, service.updateDisc(new Disc("New", stdDisc.getBarcode(), "New Director", 12)));
+	}
 }
