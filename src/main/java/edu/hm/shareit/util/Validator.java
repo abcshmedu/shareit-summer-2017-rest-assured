@@ -50,7 +50,6 @@ public abstract class Validator {
             {
                 checksum = 0;
             }
-
             return checksum == Integer.parseInt( isbn.substring( 12 ) );
         }
         catch ( NumberFormatException nfe )

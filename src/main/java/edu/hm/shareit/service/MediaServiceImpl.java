@@ -21,20 +21,24 @@ import edu.hm.shareit.util.Validator;
  */
 public class MediaServiceImpl implements MediaService {
 
-    private final MediaStorage mediaStorage = MediaStorage.getDefault();
+    private final MediaStorage mediaStorage = new MediaStorage();
+    
+    public MediaStorage getMediaStorage() {
+		return mediaStorage;
+	}
 
-    @Override
+	@Override
     public MediaServiceResult addBook(Book book) {
-    	if(book.getAuthor().equals("")) {
-    		return MediaServiceResult.MISSING_AUTHOR;
-    	}
     	if(book.getTitle().equals("")) {
     		return MediaServiceResult.MISSING_TITLE;
     	}
-    	if(Validator.isValidIsbn(book.getIsbn())) {
+    	if(book.getAuthor().equals("")) {
+    		return MediaServiceResult.MISSING_AUTHOR;
+    	}
+    	if(!Validator.isValidIsbn(book.getIsbn())) {
     		return MediaServiceResult.INVALID_ISBN;
     	}
-        if (mediaStorage.containsBook(book.getIsbn())) {
+        if(mediaStorage.containsBook(book.getIsbn())) {
             return MediaServiceResult.ISBN_ALREADY_IN_USE;
         }
         mediaStorage.addBook(book);
@@ -59,11 +63,11 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium getBook(String isbn) {
-    	if(Validator.isValidIsbn(isbn)) {
+    	if(!Validator.isValidIsbn(isbn)) {
     		return null;
     	}
     	if(mediaStorage.containsBook(isbn)) {
-    		mediaStorage.getBook(isbn);
+    		return mediaStorage.getBook(isbn);
     	}
     	return null;
     }
@@ -75,13 +79,13 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult updateBook(Book book) {
-    	if(book.getAuthor().equals("")) {
-    		return MediaServiceResult.MISSING_AUTHOR;
-    	}
     	if(book.getTitle().equals("")) {
     		return MediaServiceResult.MISSING_TITLE;
     	}
-    	if(Validator.isValidIsbn(book.getIsbn())) {
+    	if(book.getAuthor().equals("")) {
+    		return MediaServiceResult.MISSING_AUTHOR;
+    	}
+    	if(!Validator.isValidIsbn(book.getIsbn())) {
     		return MediaServiceResult.INVALID_ISBN;
     	}
     	if(mediaStorage.containsBook(book.getIsbn())) {

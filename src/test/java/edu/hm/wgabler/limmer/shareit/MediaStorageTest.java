@@ -171,4 +171,58 @@ public class MediaStorageTest {
 		mediaStorage.addDisc(stdDisc);
 		assertEquals("MediaStorage [books=[Book{title='Title', author='Author', isbn='123'}], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", mediaStorage.toString());
 	}
+	
+	@Test
+	public void notEqualsNullTest() {
+		assertEquals(false, new MediaStorage().equals(null));
+	}
+	
+	@Test
+	public void equalsItselfTest() {
+		MediaStorage storage = new MediaStorage();
+		assertEquals(true, storage.equals(storage));
+	}
+	
+	@Test
+	public void notEqualsOtherClassTest() {
+		MediaStorage storage = new MediaStorage();
+		assertEquals(false, storage.equals(new String()));
+	}
+	
+	@Test
+	public void notEqualsOtherBooksTest() {
+		MediaStorage storage = new MediaStorage();
+		MediaStorage storage2 = new MediaStorage();
+		storage2.addBook(new Book());
+		assertEquals(false, storage.equals(storage2));
+	}
+	
+	@Test
+	public void notEqualsOtherDiscsTest() {
+		MediaStorage storage = new MediaStorage();
+		MediaStorage storage2 = new MediaStorage();
+		storage2.addDisc(new Disc());
+		assertEquals(false, storage.equals(storage2));
+	}
+	
+	@Test
+	public void notEqualsOtherBooksAndDiscsTest() {
+		MediaStorage storage = new MediaStorage();
+		storage.addBook(new Book());
+		MediaStorage storage2 = new MediaStorage();
+		storage2.addDisc(stdDisc);
+		storage2.addBook(stdBook);
+		assertEquals(false, storage.equals(storage2));
+	}
+	
+	@Test
+	public void eqalsTest() {
+		MediaStorage storage = new MediaStorage();
+		storage.addBook(stdBook);
+		storage.addDisc(stdDisc);
+		MediaStorage storage2 = new MediaStorage();
+		storage2.addDisc(stdDisc);
+		storage2.addBook(stdBook);
+		assertEquals(true, storage.equals(storage2));
+	}
 }

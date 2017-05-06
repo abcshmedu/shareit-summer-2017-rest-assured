@@ -6,6 +6,7 @@ import edu.hm.shareit.media.Disc;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
@@ -34,7 +35,7 @@ public final class MediaStorage {
     }
 
     public boolean containsBook(String isbn) {
-        return books.stream().anyMatch(b -> b.getIsbn().equals(isbn));
+        return books.stream().anyMatch(b -> (b.getIsbn()).equals(isbn));
     }
 
     public List<Book> getBooks() {
@@ -75,4 +76,16 @@ public final class MediaStorage {
 	public String toString() {
 		return "MediaStorage [books=" + books + ", discs=" + discs + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		MediaStorage other = (MediaStorage) obj;
+		return Objects.equals(books, other.books) &&
+				Objects.equals(discs, other.discs);
+	}
+	
+	
 }
