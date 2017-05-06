@@ -11,7 +11,7 @@ public class Copy {
     private final Medium medium;
     private final String owner;
 
-    private Copy(Medium medium, String owner) {
+    public Copy(Medium medium, String owner) {
         this.medium = medium;
         this.owner = owner;
     }

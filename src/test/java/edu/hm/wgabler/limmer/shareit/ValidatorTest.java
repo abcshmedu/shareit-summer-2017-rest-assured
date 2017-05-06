@@ -1,4 +1,4 @@
-package edu.hm.wgabler.limmer.shareit.util;
+package edu.hm.wgabler.limmer.shareit;
 
 import static org.junit.Assert.*;
 

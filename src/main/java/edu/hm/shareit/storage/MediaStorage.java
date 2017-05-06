@@ -54,6 +54,10 @@ public final class MediaStorage {
     public void addDisc(Disc disc) {
         discs.add(disc);
     }
+    
+    public boolean containsDisc(String barcode) {
+        return discs.stream().anyMatch(b -> b.getBarcode().equals(barcode));
+    }
 
     public List<Disc> getDiscs() {
         return Collections.unmodifiableList(discs);

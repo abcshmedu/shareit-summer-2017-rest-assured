@@ -1,4 +1,4 @@
-package edu.hm.wgabler.limmer.shareit.media;
+package edu.hm.wgabler.limmer.shareit;
 
 import static org.junit.Assert.*;
 
@@ -73,5 +73,11 @@ public class BookTest {
 		Book book = new Book("Title", "Author", "12345");
 		Book book2 = new Book("Title", "Author", "otherIsbn");
 		assertEquals(false, book.equals(book2));
+	}
+	
+	@Test
+	public void sameHashCodeTest() {
+		Book book = new Book("Title", "Author", "12345");
+		assertEquals(book.hashCode(), book.hashCode());
 	}
 }
