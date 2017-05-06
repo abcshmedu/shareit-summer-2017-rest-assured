@@ -6,13 +6,17 @@
  */
 package edu.hm.shareit.service;
 
+import java.util.List;
+
 import edu.hm.shareit.media.Book;
 import edu.hm.shareit.media.Disc;
 import edu.hm.shareit.media.Medium;
 import edu.hm.shareit.storage.MediaStorage;
+import edu.hm.shareit.util.Validator;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 25.04.17
  */
 public class MediaServiceImpl implements MediaService {
@@ -21,10 +25,20 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult addBook(Book book) {
+    	if(book.getAuthor().equals("")) {
+    		return MediaServiceResult.MISSING_AUTHOR;
+    	}
+    	if(book.getTitle().equals("")) {
+    		return MediaServiceResult.MISSING_TITLE;
+    	}
+    	if(Validator.isValidIsbn(book.getIsbn())) {
+    		return MediaServiceResult.INVALID_ISBN;
+    	}
         if (mediaStorage.containsBook(book.getIsbn())) {
             return MediaServiceResult.ISBN_ALREADY_IN_USE;
         }
-        return null;
+        mediaStorage.addBook(book);
+        return MediaServiceResult.OK;
     }
 
     @Override
@@ -34,7 +48,8 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium[] getBooks() {
-        return new Medium[0];
+    	List<Book> bookList = mediaStorage.getBooks();
+    	return bookList.toArray(new Medium[bookList.size()]);
     }
 
     @Override
@@ -44,7 +59,13 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public Medium getBook(String isbn) {
-        return null;
+    	if(Validator.isValidIsbn(isbn)) {
+    		return null;
+    	}
+    	if(mediaStorage.containsBook(isbn)) {
+    		mediaStorage.getBook(isbn);
+    	}
+    	return null;
     }
 
     @Override
@@ -54,7 +75,21 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult updateBook(Book book) {
-        return null;
+    	if(book.getAuthor().equals("")) {
+    		return MediaServiceResult.MISSING_AUTHOR;
+    	}
+    	if(book.getTitle().equals("")) {
+    		return MediaServiceResult.MISSING_TITLE;
+    	}
+    	if(Validator.isValidIsbn(book.getIsbn())) {
+    		return MediaServiceResult.INVALID_ISBN;
+    	}
+    	if(mediaStorage.containsBook(book.getIsbn())) {
+    		mediaStorage.removeBook(book.getIsbn());
+    		mediaStorage.addBook(book);
+    		return MediaServiceResult.OK;
+    	}
+    	return MediaServiceResult.ISBN_NOT_FOUND;
     }
 
     @Override

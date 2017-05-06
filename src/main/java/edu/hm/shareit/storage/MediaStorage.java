@@ -22,7 +22,7 @@ public final class MediaStorage {
     private final List<Book> books;
     private final List<Disc> discs;
 
-    private MediaStorage() {
+    public MediaStorage() {
         this.books = new LinkedList<>();
         this.discs = new LinkedList<>();
     }
@@ -66,4 +66,9 @@ public final class MediaStorage {
     public boolean removeDisc(String barcode) {
         return discs.removeIf(d -> d.getBarcode().equals(barcode));
     }
+
+	@Override
+	public String toString() {
+		return "MediaStorage [books=" + books + ", discs=" + discs + "]";
+	}
 }

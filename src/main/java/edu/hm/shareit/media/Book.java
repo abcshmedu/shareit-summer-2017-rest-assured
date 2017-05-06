@@ -13,6 +13,10 @@ public class Book extends Medium {
      * ISBN-13. Used to identify discs.
      */
     private final String isbn;
+    
+    public Book() {
+    	this("", "", "");
+    }
 
     public Book(String title, String author, String isbn) {
         super(title);
@@ -31,21 +35,23 @@ public class Book extends Medium {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Book{");
-        sb.append("author='").append(author).append('\'');
+        sb.append("title='").append(getTitle()).append('\'');
+        sb.append(", author='").append(author).append('\'');
         sb.append(", isbn='").append(isbn).append('\'');
         sb.append('}');
         return sb.toString();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Book book = (Book) o;
-        return Objects.equals(author, book.author) &&
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		if (!super.equals(obj)) return false;
+		Book book = (Book) obj;
+		return Objects.equals(author, book.author) &&
                 Objects.equals(isbn, book.isbn);
-    }
+	}
 
     @Override
     public int hashCode() {

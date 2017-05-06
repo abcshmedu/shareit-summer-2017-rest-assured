@@ -15,6 +15,10 @@ public class Disc extends Medium {
     private final String director;
     private final int fsk;
 
+    public Disc() {
+    	this("", "", "", 0);
+    }
+    
     public Disc(String title, String barcode, String director, int fsk) {
         super(title);
         this.barcode = barcode;
@@ -37,7 +41,8 @@ public class Disc extends Medium {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Disc{");
-        sb.append("barcode='").append(barcode).append('\'');
+        sb.append("title='").append(getTitle()).append('\'');
+        sb.append(", barcode='").append(barcode).append('\'');
         sb.append(", director='").append(director).append('\'');
         sb.append(", fsk=").append(fsk);
         sb.append('}');
