@@ -9,6 +9,7 @@ package edu.hm.shareit.service;
 import edu.hm.shareit.media.Book;
 import edu.hm.shareit.media.Disc;
 import edu.hm.shareit.media.Medium;
+import edu.hm.shareit.storage.MediaStorage;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
@@ -16,8 +17,13 @@ import edu.hm.shareit.media.Medium;
  */
 public class MediaServiceImpl implements MediaService {
 
+    private final MediaStorage mediaStorage = MediaStorage.getDefault();
+
     @Override
     public MediaServiceResult addBook(Book book) {
+        if (mediaStorage.containsBook(book.getIsbn())) {
+            return MediaServiceResult.ISBN_ALREADY_IN_USE;
+        }
         return null;
     }
 

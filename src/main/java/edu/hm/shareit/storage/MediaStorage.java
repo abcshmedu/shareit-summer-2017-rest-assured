@@ -33,6 +33,10 @@ public final class MediaStorage {
         books.add(book);
     }
 
+    public boolean containsBook(String isbn) {
+        return books.stream().anyMatch(b -> b.getIsbn().equals(isbn));
+    }
+
     public List<Book> getBooks() {
         return Collections.unmodifiableList(books);
     }
