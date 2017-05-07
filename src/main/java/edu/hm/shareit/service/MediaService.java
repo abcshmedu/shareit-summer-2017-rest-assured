@@ -64,7 +64,17 @@ public interface MediaService {
      */
     Medium getDisc(String barcode);
     
+    /**
+     * Update a book.
+     * @param book Book.
+     * @return MediaServiceResult if updating was possible.
+     */
     MediaServiceResult updateBook(Book book);
 
+    /**
+     * Update a disc.
+     * @param disc disc.
+     * @return MediaServiceResult if updating was possible.
+     */
     MediaServiceResult updateDisc(Disc disc);
 }

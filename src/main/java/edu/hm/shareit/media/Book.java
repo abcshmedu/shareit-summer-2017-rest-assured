@@ -69,13 +69,21 @@ public class Book extends Medium {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
         Book book = (Book) obj;
-        return Objects.equals(author, book.author) &&
-                Objects.equals(isbn, book.isbn);
+        return Objects.equals(author, book.author)
+                && Objects.equals(isbn, book.isbn);
     }
 
     @Override

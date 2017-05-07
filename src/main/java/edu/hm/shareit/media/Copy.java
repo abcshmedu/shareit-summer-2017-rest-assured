@@ -57,11 +57,15 @@ public class Copy {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Copy copy = (Copy) o;
-        return Objects.equals(medium, copy.medium) &&
-                Objects.equals(owner, copy.owner);
+        return Objects.equals(medium, copy.medium)
+               && Objects.equals(owner, copy.owner);
     }
 
     @Override

@@ -138,12 +138,18 @@ public final class MediaStorage {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         MediaStorage other = (MediaStorage) obj;
-        return Objects.equals(books, other.books) &&
-                Objects.equals(discs, other.discs);
+        return Objects.equals(books, other.books)
+                && Objects.equals(discs, other.discs);
     }
 
     @Override

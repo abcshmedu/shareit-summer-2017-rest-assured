@@ -26,21 +26,34 @@ public enum MediaServiceResult {
     BARCODE_NOT_FOUND(404, "Barcode not found"),
     ISBN_MISMATCH(401, "ISBN in URI and JSON do not match"),
     BARCODE_MISMATCH(401, "Barcode in URI and JSON do not match"),
-	
-	ERROR(401, "Error while processing data");
+    
+    ERROR(401, "Error while processing data");
 
-    int code;
-    String status;
+    private int code;
+    private String status;
 
+    /**
+     * Constructor for the enum.
+     * @param code Statuscode.
+     * @param status Status message.
+     */
     MediaServiceResult(int code, String status) {
         this.code = code;
         this.status = status;
     }
 
+    /**
+     * Getter for the code.
+     * @return Status code.
+     */
     public int getCode() {
         return code;
     }
 
+    /**
+     * Getter for the status.
+     * @return Status message.
+     */
     public String getStatus() {
         return status;
     }
