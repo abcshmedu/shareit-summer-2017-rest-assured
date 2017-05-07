@@ -21,6 +21,7 @@ public abstract class Validator {
      * source: http://www.moreofless.co.uk/validate-isbn-13-java/
      */
     public static boolean isValidIsbn(String isbn) {
+        final int isbnLength = 13;
         if (isbn == null) {
             return false;
         }
@@ -29,23 +30,25 @@ public abstract class Validator {
         isbn = isbn.replaceAll("-", "");
 
         //must be a 13 digit ISBN
-        if (isbn.length() != 13) {
+        if (isbn.length() != isbnLength) {
             return false;
         }
 
         try {
             int tot = 0;
-            for (int i = 0; i < 12; i++) {
-                int digit = Integer.parseInt(isbn.substring( i, i + 1 ));
-                tot += (i % 2 == 0) ? digit * 1 : digit * 3;
+            for (int i = 0; i < isbnLength - 1; i++) {
+                int digit = Integer.parseInt(isbn.substring(i, i + 1));
+                final int three = 3;
+                tot += (i % 2 == 0) ? digit * 1 : digit * three;
             }
 
+            final int ten = 10;
             //checksum must be 0-9. If calculated as 10 then = 0
-            int checksum = 10 - (tot % 10);
-            if (checksum == 10) {
+            int checksum = ten - (tot % ten);
+            if (checksum == ten) {
                 checksum = 0;
             }
-            return checksum == Integer.parseInt(isbn.substring( 12 ));
+            return checksum == Integer.parseInt(isbn.substring(isbnLength - 1));
         }
         catch (NumberFormatException nfe) {
             //to catch invalid ISBNs that have non-numeric characters in them
@@ -62,17 +65,20 @@ public abstract class Validator {
      * (but modified some parts)
      */
     public static boolean isValidBarcode(String barcode) {
-        if(barcode == null) {
+        final int barcodeLength = 13;
+        final int barcode8Length = 8;
+        
+        if (barcode == null) {
             return false;
         }
         
         try {
              // Add five 0 if the code has only 8 digits
-            if (barcode.length() == 8) {
+            if (barcode.length() == barcode8Length) {
                 barcode = "00000" + barcode;
             }
             // Check for 13 digits otherwise
-            else if (barcode.length() != 13) {
+            else if (barcode.length() != barcodeLength) {
                 return false;
             }
             
@@ -81,32 +87,30 @@ public abstract class Validator {
             barcode = barcode.substring(0, barcode.length() - 1);
             
             // Add even numbers together
-            int even = Integer.parseInt(barcode.substring(1, 2))
-                    + Integer.parseInt(barcode.substring(3, 4))
-                    + Integer.parseInt(barcode.substring(5, 6))
-                    + Integer.parseInt(barcode.substring(7, 8))
-                    + Integer.parseInt(barcode.substring(9, 10))
-                    + Integer.parseInt(barcode.substring(11, 12));
+            int even = 0;
+            for (int i = 1; i < barcodeLength - 1; i++) {
+                even += Integer.parseInt(barcode.substring(i++, i));
+            }
             // Multiply this result by 3
-            even *= 3;
+            final int three = 3;
+            even *= three;
             
             // Add odd numbers together
-            int odd = Integer.parseInt(barcode.substring(0, 1))
-                    + Integer.parseInt(barcode.substring(2, 3))
-                    + Integer.parseInt(barcode.substring(4, 5))
-                    + Integer.parseInt(barcode.substring(6, 7))
-                    + Integer.parseInt(barcode.substring(8, 9))
-                    + Integer.parseInt(barcode.substring(10, 11));
+            final int ten = 10;
+            int odd = 0;
+            for (int i = 0; i <= ten; i++) {
+                odd += Integer.parseInt(barcode.substring(i++, i));
+            }
             
             // Add two totals together
             int total = even + odd;
     
             // Calculate the checksum
             // Divide total by 10 and store the remainder
-            int checksum = total % 10;
+            int checksum = total % ten;
             // If result is not 0 then take away 10
             if (checksum != 0) {
-                 checksum = 10 - checksum;
+                 checksum = ten - checksum;
             }
     
             // Return the result

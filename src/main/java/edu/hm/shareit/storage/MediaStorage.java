@@ -12,6 +12,7 @@ import java.util.Objects;
  * MediaStorage for saving Books and Discs.
  *
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 04.05.17
  */
 public final class MediaStorage {

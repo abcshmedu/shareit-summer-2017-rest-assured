@@ -8,6 +8,7 @@ package edu.hm.shareit.service;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 19.04.17
  */
 public enum MediaServiceResult {

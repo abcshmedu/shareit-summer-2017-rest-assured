@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
+ * @author Andrea Limmer, limmer@hm.edu
  * @since 18/04/2017
  */
 @Path("/media")
