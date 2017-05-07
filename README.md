@@ -18,3 +18,5 @@ Eine JSON-Repräsentation eines gespeicherten Buchexemplares liefern, falls vorh
 `GET /media/books/copy` Alle Buchexemplare auflisten.
 
 `PUT /media/books/copy/{copy-id}` Daten zu vorhandenem Buchexemplar modifizieren. Mögliche Fehler: Copy-ID nicht vorhanden, Felder im JSON fehlen.
+
+Analoge REST-API für Discs unter `/media/discs/copy/*` und Barcode statt ISBN.
