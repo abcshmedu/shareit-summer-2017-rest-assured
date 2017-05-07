@@ -6,7 +6,7 @@ Andrea Limmer, Wolfgang Gabler
 
 #### REST-API für Exemplare
 
-`Copy`/Exemplare werden durch eine eindeutige 
+`Copy`-Exemplare werden durch eine eindeutige Copy-ID identifiziert.
 
 `POST /media/books/copy`
 Neues Exemplar für ein Buch anlegen. JSON Payload enthält ISBN des Buches sowie Namen des Besitzers.
