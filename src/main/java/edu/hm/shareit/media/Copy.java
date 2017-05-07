@@ -8,18 +8,40 @@ import java.util.Objects;
  */
 public class Copy {
 
+    /**
+     * Medium of which this is a copy.
+     */
     private final Medium medium;
+    /**
+     * The Copy's owner.
+     */
     private final String owner;
 
+    /**
+     * Create new Copy for given Medium and owner.
+     *
+     * @param medium Copy's Medium.
+     * @param owner  Copy's owner.
+     */
     public Copy(Medium medium, String owner) {
         this.medium = medium;
         this.owner = owner;
     }
 
+    /**
+     * Get Medium.
+     *
+     * @return Medium.
+     */
     public Medium getMedium() {
         return medium;
     }
 
+    /**
+     * Get Owner.
+     *
+     * @return Owner string.
+     */
     public String getOwner() {
         return owner;
     }

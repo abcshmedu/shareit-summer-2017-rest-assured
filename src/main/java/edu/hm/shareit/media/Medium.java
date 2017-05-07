@@ -8,12 +8,25 @@ import java.util.Objects;
  */
 public abstract class Medium {
 
+    /**
+     * The Medium's title.
+     */
     private final String title;
 
+    /**
+     * Create new Medium with given title.
+     *
+     * @param title Given title.
+     */
     public Medium(String title) {
         this.title = title;
     }
 
+    /**
+     * Get title.
+     *
+     * @return Title.
+     */
     public String getTitle() {
         return title;
     }

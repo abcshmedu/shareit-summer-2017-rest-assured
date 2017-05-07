@@ -12,13 +12,30 @@ public class Disc extends Medium {
      * EAN-13 barcode. Used to identify discs.
      */
     private final String barcode;
+    /**
+     * The Disc's director.
+     */
     private final String director;
+    /**
+     * The Disc's fsk.
+     */
     private final int fsk;
 
+    /**
+     * Create new Disc with default values.
+     */
     public Disc() {
-    	this("", "", "", 0);
+        this("", "", "", 0);
     }
-    
+
+    /**
+     * Create new Disc with given values.
+     *
+     * @param title    The Disc's title.
+     * @param barcode  The Disc's barcode.
+     * @param director The Disc's director.
+     * @param fsk      The Disc's fsk.
+     */
     public Disc(String title, String barcode, String director, int fsk) {
         super(title);
         this.barcode = barcode;
@@ -26,14 +43,29 @@ public class Disc extends Medium {
         this.fsk = fsk;
     }
 
+    /**
+     * Get Barcode.
+     *
+     * @return Barcode.
+     */
     public String getBarcode() {
         return barcode;
     }
 
+    /**
+     * Get director.
+     *
+     * @return Director.
+     */
     public String getDirector() {
         return director;
     }
 
+    /**
+     * Get fsk.
+     *
+     * @return Fsk.
+     */
     public int getFsk() {
         return fsk;
     }

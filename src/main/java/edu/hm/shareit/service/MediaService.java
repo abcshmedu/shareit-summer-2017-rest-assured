@@ -11,20 +11,60 @@ import edu.hm.shareit.media.Disc;
 import edu.hm.shareit.media.Medium;
 
 /**
+ * Interface for communicating with logical layer.
+ *
  * @author Wolfgang Gabler, wgabler@hm.edu
  * @since 19.04.17
  */
 public interface MediaService {
 
+    /**
+     * Add a Book to storage.
+     *
+     * @param book The new Book.
+     * @return Result describing success or failure.
+     */
     MediaServiceResult addBook(Book book);
+
+    /**
+     * Add a Disc to storage.
+     *
+     * @param disc The new Disc.
+     * @return Result describing success or failure.
+     */
     MediaServiceResult addDisc(Disc disc);
 
+    /**
+     * Get an Array of all Books.
+     *
+     * @return Array of all Books.
+     */
     Medium[] getBooks();
+
+    /**
+     * Get an Array of all Discs.
+     *
+     * @return Array of all Discs.
+     */
     Medium[] getDiscs();
 
+    /**
+     * Return Book for isbn if available.
+     *
+     * @param isbn Given ISBN.
+     * @return Book if available, null otherwise.
+     */
     Medium getBook(String isbn);
-    Medium getDisc(String barcode);
 
+    /**
+     * Return Disc for barcode if available.
+     *
+     * @param barcode Given barcode.
+     * @return Book if available, null otherwise.
+     */
+    Medium getDisc(String barcode);
+    
     MediaServiceResult updateBook(Book book);
+
     MediaServiceResult updateDisc(Disc disc);
 }
