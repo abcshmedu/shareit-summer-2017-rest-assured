@@ -25,7 +25,9 @@ public enum MediaServiceResult {
     ISBN_NOT_FOUND(404, "ISBN not found"),
     BARCODE_NOT_FOUND(404, "Barcode not found"),
     ISBN_MISMATCH(401, "ISBN in URI and JSON do not match"),
-    BARCODE_MISMATCH(401, "Barcode in URI and JSON do not match");
+    BARCODE_MISMATCH(401, "Barcode in URI and JSON do not match"),
+	
+	ERROR(401, "Error while processing data");
 
     int code;
     String status;

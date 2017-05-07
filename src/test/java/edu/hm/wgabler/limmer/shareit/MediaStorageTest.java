@@ -225,4 +225,11 @@ public class MediaStorageTest {
 		storage2.addBook(stdBook);
 		assertEquals(true, storage.equals(storage2));
 	}
+	
+	@Test 
+	public void hashCodeEqualsTest() {
+		MediaStorage storage = new MediaStorage();
+		MediaStorage storage2 = new MediaStorage();
+		assertEquals(storage.hashCode(), storage2.hashCode());
+	}
 }
