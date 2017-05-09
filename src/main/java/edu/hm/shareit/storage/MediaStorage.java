@@ -16,7 +16,17 @@ import java.util.Objects;
  * @since 04.05.17
  */
 public final class MediaStorage {
-
+    
+    private static final MediaStorage INSTANCE = new MediaStorage();
+    
+    /**
+     * Get the static default MediaStorage.
+     * @return default static MediaStorage.
+     */
+    public static MediaStorage getDefault() {
+        return INSTANCE;
+    }
+     
     /**
      * Saved books.
      */

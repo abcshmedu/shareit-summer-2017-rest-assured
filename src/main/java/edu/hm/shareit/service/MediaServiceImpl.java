@@ -21,7 +21,22 @@ import edu.hm.shareit.util.Validator;
  */
 public class MediaServiceImpl implements MediaService {
 
-    private final MediaStorage mediaStorage = new MediaStorage();
+    private final MediaStorage mediaStorage;
+    
+    /**
+     * Standard constructor.
+     */
+    public MediaServiceImpl() {
+        this.mediaStorage = MediaStorage.getDefault();
+    }
+    
+    /**
+     * Constructor to set custom MediaStorage.
+     * @param mediaStorage MediaStorage.
+     */
+    public MediaServiceImpl(MediaStorage mediaStorage) {
+        this.mediaStorage = mediaStorage;
+    }
     
     @Override
     public MediaServiceResult addBook(Book book) {

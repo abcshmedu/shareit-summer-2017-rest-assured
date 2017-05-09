@@ -31,8 +31,23 @@ public class MediaResource {
     /**
      * MediaService to work with.
      */
-    private final MediaService mediaService = new MediaServiceImpl();
+    private final MediaService mediaService;
 
+    /**
+     * Default constructor.
+     */
+    public MediaResource() {
+        this.mediaService = new MediaServiceImpl();
+    }
+    
+    /**
+     * Constructor to set custom MediaService.
+     * @param mediaService MediaService
+     */
+    public MediaResource(MediaService mediaService) {
+        this.mediaService = mediaService;
+    }
+    
     /**
      * Add a book.
      * @param book Book to add.
