@@ -12,7 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hm.shareit.api.MediaResource;
 import edu.hm.shareit.media.Book;
 import edu.hm.shareit.media.Disc;
+import edu.hm.shareit.service.MediaService;
+import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;
+import edu.hm.shareit.storage.MediaStorage;
 
 /**
  * MediaResourceTestTest.
@@ -25,12 +28,14 @@ public class MediaResourceTest {
     private final Disc disc1 = new Disc("Disc Title", "7501031311309", "Director", 0);
     private final Disc disc2 = new Disc("Other Disc", "7501054530107", "Other Director", 6);
     
+    private final MediaService mediaService = new MediaServiceImpl(new MediaStorage());
+    
     /**
      * Test addBook method.
      */
     @Test
     public void addBookTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         Response response = mediaResource.addBook(friedhof);
         assertEquals(MediaServiceResult.OK.getCode(), response.getStatus());
     }
@@ -40,7 +45,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getBooksEmptyTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         Response response = mediaResource.getBooks();
         assertEquals(MediaServiceResult.OK.getCode(), response.getStatus());
         assertEquals(response.getEntity(), "[]");
@@ -52,7 +57,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getBooksTest() throws JsonProcessingException {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addBook(friedhof);
         mediaResource.addBook(achtnacht);
         ObjectMapper mapper = new ObjectMapper();
@@ -67,7 +72,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getBookTest() throws JsonProcessingException {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addBook(friedhof);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(friedhof);
@@ -80,7 +85,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getBookNotAvailableTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         String json = MediaServiceResult.ISBN_NOT_FOUND.getStatus();
         Response response = mediaResource.getBook(friedhof.getIsbn());
         assertEquals(json, response.getEntity());
@@ -91,7 +96,7 @@ public class MediaResourceTest {
      */
     @Test
     public void updateBookIsbnMismatchTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addBook(friedhof);
         Response response = mediaResource.updateBook("978-3426199190", achtnacht);
         assertEquals(MediaServiceResult.ISBN_MISMATCH.getCode(), response.getStatus());
@@ -103,7 +108,7 @@ public class MediaResourceTest {
      */
     @Test
     public void updateBookTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addBook(friedhof);
         Response response = mediaResource.updateBook(friedhof.getIsbn(), new Book("Neuer Titel", "Stephen King", friedhof.getIsbn()));
         assertEquals(MediaServiceResult.OK.getCode(), response.getStatus());
@@ -118,7 +123,7 @@ public class MediaResourceTest {
      */
     @Test
     public void addDiscTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         Response response = mediaResource.addDisc(disc1);
         assertEquals(MediaServiceResult.OK.getCode(), response.getStatus());
     }
@@ -128,7 +133,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getDiscsEmptyTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         Response response = mediaResource.getDiscs();
         assertEquals(MediaServiceResult.OK.getCode(), response.getStatus());
         assertEquals(response.getEntity(), "[]");
@@ -140,7 +145,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getDiscsTest() throws JsonProcessingException {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addDisc(disc1);
         mediaResource.addDisc(disc2);
         ObjectMapper mapper = new ObjectMapper();
@@ -155,7 +160,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getDiscTest() throws JsonProcessingException {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addDisc(disc1);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(disc1);
@@ -168,7 +173,7 @@ public class MediaResourceTest {
      */
     @Test
     public void getDiscNotAvailableTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         String json = MediaServiceResult.BARCODE_NOT_FOUND.getStatus();
         Response response = mediaResource.getDisc(disc1.getBarcode());
         assertEquals(json, response.getEntity());
@@ -179,7 +184,7 @@ public class MediaResourceTest {
      */
     @Test
     public void updateDiscBarcodeMismatchTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addDisc(disc1);
         Response response = mediaResource.updateDisc(disc1.getBarcode(), disc2);
         assertEquals(MediaServiceResult.BARCODE_MISMATCH.getCode(), response.getStatus());
@@ -191,7 +196,7 @@ public class MediaResourceTest {
      */
     @Test
     public void updateDiscTest() {
-        MediaResource mediaResource = new MediaResource();
+        MediaResource mediaResource = new MediaResource(mediaService);
         mediaResource.addDisc(disc1);
         Response response = mediaResource.updateDisc(disc1.getBarcode(), new Disc("Updated Title", disc1.getBarcode(), "New Director", 0));
         assertEquals(MediaServiceResult.OK.getCode(), response.getStatus());

@@ -4,6 +4,9 @@ Team **rest assured**.
 
 Andrea Limmer, Wolfgang Gabler 
 
+Heroku: https://shareit-rest-assured.herokuapp.com/
+
+
 #### REST-API für Exemplare
 
 `Copy`-Exemplare werden durch eine eindeutige Copy-ID identifiziert.
@@ -20,3 +23,4 @@ Eine JSON-Repräsentation eines gespeicherten Buchexemplares liefern, falls vorh
 `PUT /media/books/copy/{copy-id}` Daten zu vorhandenem Buchexemplar modifizieren. Mögliche Fehler: Copy-ID nicht vorhanden, Felder im JSON fehlen.
 
 Analoge REST-API für Discs unter `/media/discs/copy/*` und Barcode statt ISBN.
+
