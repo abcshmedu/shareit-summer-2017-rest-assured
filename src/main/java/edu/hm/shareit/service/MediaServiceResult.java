@@ -28,7 +28,9 @@ public enum MediaServiceResult {
     ISBN_MISMATCH(401, "ISBN in URI and JSON do not match"),
     BARCODE_MISMATCH(401, "Barcode in URI and JSON do not match"),
     
-    ERROR(401, "Error while processing data");
+    ERROR(401, "Error while processing data"),
+
+    UNAUTHORIZED(403, "Invalid Token");
 
     private int code;
     private String status;
