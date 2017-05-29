@@ -8,6 +8,7 @@ import edu.hm.shareit.model.Medium;
 import edu.hm.shareit.service.MediaService;
 import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;
+import org.apache.http.auth.AUTH;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -55,10 +56,13 @@ public class MediaResource {
      * @return Response.
      */
     @POST
-    @Path("/books")
+    @Path("/books/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBook(Book book) {
+    public Response addBook(Book book, @PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         MediaServiceResult result = mediaService.addBook(book);
         return Response.status(result.getCode()).entity(result.getStatus()).build();
     }
@@ -70,9 +74,12 @@ public class MediaResource {
      * @return Response with the book if available.
      */
     @GET
-    @Path("/books/{isbn}")
+    @Path("/books/{isbn}/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBook(@PathParam("isbn") String isbn) {
+    public Response getBook(@PathParam("isbn") String isbn, @PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         Medium book = mediaService.getBook(isbn);
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -90,9 +97,12 @@ public class MediaResource {
      * @return Response with all books.
      */
     @GET
-    @Path("/books")
+    @Path("/books/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBooks() {
+    public Response getBooks(@PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         return getMedia(mediaService.getBooks());
     }
 
@@ -104,10 +114,13 @@ public class MediaResource {
      * @return Response.
      */
     @PUT
-    @Path("/books/{isbn}")
+    @Path("/books/{isbn}/{jwt}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateBook(@PathParam("isbn") String isbn, Book book) {
+    public Response updateBook(@PathParam("isbn") String isbn, Book book, @PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         MediaServiceResult result;
         if (isbn.equals(book.getIsbn())) {
             result = mediaService.updateBook(book);
@@ -124,10 +137,13 @@ public class MediaResource {
      * @return Response.
      */
     @POST
-    @Path("/discs")
+    @Path("/discs/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addDisc(Disc disc) {
+    public Response addDisc(Disc disc, @PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         MediaServiceResult result = mediaService.addDisc(disc);
         return Response.status(result.getCode()).entity(result.getStatus()).build();
     }
@@ -139,9 +155,12 @@ public class MediaResource {
      * @return Response with the disc if available.
      */
     @GET
-    @Path("/discs/{barcode}")
+    @Path("/discs/{barcode}/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisc(@PathParam("barcode") String barcode) {
+    public Response getDisc(@PathParam("barcode") String barcode, @PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         Medium disc = mediaService.getDisc(barcode);
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -159,9 +178,12 @@ public class MediaResource {
      * @return Response with all discs.
      */
     @GET
-    @Path("/discs")
+    @Path("/discs/{jwt}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDiscs() {
+    public Response getDiscs(@PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         return getMedia(mediaService.getDiscs());
     }
 
@@ -173,10 +195,13 @@ public class MediaResource {
      * @return Response.
      */
     @PUT
-    @Path("/discs/{barcode}")
+    @Path("/discs/{barcode}/{jwt}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateDisc(@PathParam("barcode") String barcode, Disc disc) {
+    public Response updateDisc(@PathParam("barcode") String barcode, Disc disc, @PathParam("jwt") String jwt) {
+        if (!AuthValidator.checkValidity(jwt)) {
+            return Response.status(401).build();
+        }
         MediaServiceResult result;
         if (barcode.equals(disc.getBarcode())) {
             result = mediaService.updateDisc(disc);
