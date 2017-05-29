@@ -25,15 +25,26 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * REST API for login and logout.
+ *
  * @author Wolfgang Gabler, wgabler@hm.edu
  * @since 29.05.17
  */
 @Path("/user")
 public class UserResource {
 
+    /**
+     * URL for querying auth service for login.
+     */
     private static final String URL_AUTH_LOGIN = "https://shareit-auth-rest-assured.herokuapp.com/shareit/auth/login";
+    /**
+     * URL for querying auth service for logout.
+     */
     private static final String URL_AUTH_LOGOUT = "https://shareit-auth-rest-assured.herokuapp.com/shareit/auth/logout";
 
+    /**
+     * Initialize ObjectMapper for Unirest according to website.
+     */
     static {
         Unirest.setObjectMapper(new ObjectMapper() {
             private com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper
@@ -57,6 +68,12 @@ public class UserResource {
         });
     }
 
+    /**
+     * Login API Call. Will be delegated to auth service.
+     *
+     * @param user User Object containing username and password.
+     * @return Response according to result from auth service.
+     */
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -68,25 +85,32 @@ public class UserResource {
                     .header("Content-Type", "application/json")
                     .body(user)
                     .asString();
-            if (response.getStatus() == 200) {
-                return Response.status(200).entity(response.getBody()).build();
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                return Response.status(Response.Status.OK.getStatusCode()).entity(response.getBody()).build();
             }
         } catch (UnirestException ignored) {
         }
-        return Response.status(401).build();
+        return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
     }
 
+    /**
+     * Logout API Call. Will be delegated to auth service.
+     *
+     * @param username Username.
+     * @param jwt      The user's jwt token.
+     * @return Response according to result from auth service.
+     */
     @GET
     @Path("/logout/{username}/{jwt}")
     public Response logout(@PathParam("username") String username, @PathParam("jwt") String jwt) {
         try {
             final HttpResponse<InputStream> response = Unirest.get(URL_AUTH_LOGOUT + "/" + username + "/" + jwt).asBinary();
-            if (response.getStatus() == 200) {
-                return Response.status(200).build();
+            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+                return Response.status(Response.Status.OK.getStatusCode()).build();
             }
         } catch (UnirestException ignored) {
         }
-        return Response.status(401).build();
+        return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
     }
 
 }
