@@ -8,7 +8,6 @@ import edu.hm.shareit.model.Medium;
 import edu.hm.shareit.service.MediaService;
 import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;
-import org.apache.http.auth.AUTH;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
