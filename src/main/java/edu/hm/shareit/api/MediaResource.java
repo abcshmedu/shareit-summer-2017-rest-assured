@@ -1,10 +1,10 @@
 package edu.hm.shareit.api;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import edu.hm.shareit.media.Book;
-import edu.hm.shareit.media.Disc;
-import edu.hm.shareit.media.Medium;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.hm.shareit.model.Book;
+import edu.hm.shareit.model.Disc;
+import edu.hm.shareit.model.Medium;
 import edu.hm.shareit.service.MediaService;
 import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;
@@ -18,9 +18,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
@@ -41,17 +38,19 @@ public class MediaResource {
     public MediaResource() {
         this.mediaService = new MediaServiceImpl();
     }
-    
+
     /**
      * Constructor to set custom MediaService.
+     *
      * @param mediaService MediaService
      */
     public MediaResource(MediaService mediaService) {
         this.mediaService = mediaService;
     }
-    
+
     /**
      * Add a book.
+     *
      * @param book Book to add.
      * @return Response.
      */
@@ -66,6 +65,7 @@ public class MediaResource {
 
     /**
      * Get a book.
+     *
      * @param isbn ISBN of the book.
      * @return Response with the book if available.
      */
@@ -86,6 +86,7 @@ public class MediaResource {
 
     /**
      * Get all books.
+     *
      * @return Response with all books.
      */
     @GET
@@ -97,6 +98,7 @@ public class MediaResource {
 
     /**
      * Update a book.
+     *
      * @param isbn ISBN of the book.
      * @param book Book to update.
      * @return Response.
@@ -109,8 +111,7 @@ public class MediaResource {
         MediaServiceResult result;
         if (isbn.equals(book.getIsbn())) {
             result = mediaService.updateBook(book);
-        }
-        else {
+        } else {
             result = MediaServiceResult.ISBN_MISMATCH;
         }
         return Response.status(result.getCode()).entity(result.getStatus()).build();
@@ -118,6 +119,7 @@ public class MediaResource {
 
     /**
      * Add a disc.
+     *
      * @param disc Disc.
      * @return Response.
      */
@@ -132,6 +134,7 @@ public class MediaResource {
 
     /**
      * Get a disc.
+     *
      * @param barcode Barcode to identify the disc.
      * @return Response with the disc if available.
      */
@@ -152,6 +155,7 @@ public class MediaResource {
 
     /**
      * Get all discs.
+     *
      * @return Response with all discs.
      */
     @GET
@@ -163,8 +167,9 @@ public class MediaResource {
 
     /**
      * Update a disc.
+     *
      * @param barcode Barcode of the disc.
-     * @param disc Disc to be updated.
+     * @param disc    Disc to be updated.
      * @return Response.
      */
     @PUT
@@ -175,15 +180,15 @@ public class MediaResource {
         MediaServiceResult result;
         if (barcode.equals(disc.getBarcode())) {
             result = mediaService.updateDisc(disc);
-        }
-        else {
+        } else {
             result = MediaServiceResult.BARCODE_MISMATCH;
         }
         return Response.status(result.getCode()).entity(result.getStatus()).build();
     }
-    
+
     /**
      * Helper class for getBooks()/getDiscs().
+     *
      * @param media Array of the Media.
      * @return Response.
      */

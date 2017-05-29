@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.hm.shareit.media.Book;
-import edu.hm.shareit.media.Disc;
+import edu.hm.shareit.model.Book;
+import edu.hm.shareit.model.Disc;
 import edu.hm.shareit.storage.MediaStorage;
 
 import org.junit.Test;

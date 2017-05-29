@@ -1,7 +1,7 @@
 package edu.hm.shareit.storage;
 
-import edu.hm.shareit.media.Book;
-import edu.hm.shareit.media.Disc;
+import edu.hm.shareit.model.Book;
+import edu.hm.shareit.model.Disc;
 
 import java.util.Collections;
 import java.util.LinkedList;

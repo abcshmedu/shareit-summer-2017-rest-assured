@@ -6,9 +6,9 @@
  */
 package edu.hm.shareit.service;
 
-import edu.hm.shareit.media.Book;
-import edu.hm.shareit.media.Disc;
-import edu.hm.shareit.media.Medium;
+import edu.hm.shareit.model.Book;
+import edu.hm.shareit.model.Disc;
+import edu.hm.shareit.model.Medium;
 
 /**
  * Interface for communicating with logical layer.

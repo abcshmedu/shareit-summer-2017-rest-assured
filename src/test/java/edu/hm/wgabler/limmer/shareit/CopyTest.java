@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import edu.hm.shareit.media.Book;
-import edu.hm.shareit.media.Copy;
+import edu.hm.shareit.model.Book;
+import edu.hm.shareit.model.Copy;
 
 /**
  * CopyTest.

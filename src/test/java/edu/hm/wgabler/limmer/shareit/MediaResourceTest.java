@@ -10,8 +10,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.hm.shareit.api.MediaResource;
-import edu.hm.shareit.media.Book;
-import edu.hm.shareit.media.Disc;
+import edu.hm.shareit.model.Book;
+import edu.hm.shareit.model.Disc;
 import edu.hm.shareit.service.MediaService;
 import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;

@@ -8,9 +8,9 @@ package edu.hm.shareit.service;
 
 import java.util.List;
 
-import edu.hm.shareit.media.Book;
-import edu.hm.shareit.media.Disc;
-import edu.hm.shareit.media.Medium;
+import edu.hm.shareit.model.Book;
+import edu.hm.shareit.model.Disc;
+import edu.hm.shareit.model.Medium;
 import edu.hm.shareit.storage.MediaStorage;
 import edu.hm.shareit.util.Validator;
 

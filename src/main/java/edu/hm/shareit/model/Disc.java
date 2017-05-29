@@ -1,4 +1,4 @@
-package edu.hm.shareit.media;
+package edu.hm.shareit.model;
 
 import java.util.Objects;
 
