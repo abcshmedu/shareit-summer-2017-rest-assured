@@ -42,7 +42,7 @@ public class UserResource {
      */
     private static final String URL_AUTH_LOGOUT = "https://shareit-auth-rest-assured.herokuapp.com/shareit/auth/logout";
 
-    /**
+    /*
      * Initialize ObjectMapper for Unirest according to website.
      */
     static {
