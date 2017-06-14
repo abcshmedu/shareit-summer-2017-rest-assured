@@ -1,4 +1,4 @@
-package edu.hm.shareit;
+package edu.hm;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
