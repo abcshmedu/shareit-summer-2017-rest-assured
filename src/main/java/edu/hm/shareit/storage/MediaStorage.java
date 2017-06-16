@@ -2,9 +2,12 @@ package edu.hm.shareit.storage;
 
 import edu.hm.shareit.model.Book;
 import edu.hm.shareit.model.Disc;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,32 +19,29 @@ import java.util.Objects;
  * @since 04.05.17
  */
 public final class MediaStorage {
-    
+
     private static final MediaStorage INSTANCE = new MediaStorage();
-    
+
     /**
      * Get the static default MediaStorage.
+     *
      * @return default static MediaStorage.
      */
     public static MediaStorage getDefault() {
         return INSTANCE;
     }
-     
+
     /**
-     * Saved books.
+     * Hibernate Session.
      */
-    private final List<Book> books;
-    /**
-     * Saved discs.
-     */
-    private final List<Disc> discs;
+    private final Session entityManager;
 
     /**
      * Create new MediaStorage.
      */
     public MediaStorage() {
-        this.books = new LinkedList<>();
-        this.discs = new LinkedList<>();
+        final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        this.entityManager = sessionFactory.openSession();
     }
 
     /**
@@ -50,7 +50,9 @@ public final class MediaStorage {
      * @param book New Book.
      */
     public void addBook(Book book) {
-        books.add(book);
+        Transaction tx = entityManager.beginTransaction();
+        entityManager.persist(book);
+        tx.commit();
     }
 
     /**
@@ -60,7 +62,7 @@ public final class MediaStorage {
      * @return true if book available, false otherwise.
      */
     public boolean containsBook(String isbn) {
-        return books.stream().anyMatch(b -> (b.getIsbn()).equals(isbn));
+        return getBook(isbn) != null;
     }
 
     /**
@@ -69,7 +71,12 @@ public final class MediaStorage {
      * @return All Books.
      */
     public List<Book> getBooks() {
-        return Collections.unmodifiableList(books);
+        Transaction tx = entityManager.beginTransaction();
+        final String queryString = "from Book";
+        final Query<Book> query = entityManager.createQuery(queryString);
+        final List<Book> result = query.list();
+        tx.commit();
+        return result;
     }
 
     /**
@@ -79,7 +86,10 @@ public final class MediaStorage {
      * @return Book if available, null otherwise.
      */
     public Book getBook(String isbn) {
-        return books.stream().filter(b -> b.getIsbn().equals(isbn)).findFirst().orElse(null);
+        Transaction tx = entityManager.beginTransaction();
+        final Book book = entityManager.get(Book.class, isbn);
+        tx.commit();
+        return book;
     }
 
     /**
@@ -89,7 +99,10 @@ public final class MediaStorage {
      * @return true if a Book is removed, false if none existed for given ISBN.
      */
     public boolean removeBook(String isbn) {
-        return books.removeIf(b -> b.getIsbn().equals(isbn));
+        final Book book = entityManager.load(Book.class, isbn);
+        entityManager.delete(book);
+        entityManager.flush();
+        return book != null;
     }
 
     // Discs
@@ -100,7 +113,9 @@ public final class MediaStorage {
      * @param disc New Disk.
      */
     public void addDisc(Disc disc) {
-        discs.add(disc);
+        Transaction tx = entityManager.beginTransaction();
+        entityManager.persist(disc);
+        tx.commit();
     }
 
     /**
@@ -110,7 +125,7 @@ public final class MediaStorage {
      * @return true if Disc available, false otherwise.
      */
     public boolean containsDisc(String barcode) {
-        return discs.stream().anyMatch(b -> b.getBarcode().equals(barcode));
+        return getDisc(barcode) != null;
     }
 
     /**
@@ -119,7 +134,12 @@ public final class MediaStorage {
      * @return Copy List of all Discs.
      */
     public List<Disc> getDiscs() {
-        return Collections.unmodifiableList(discs);
+        Transaction tx = entityManager.beginTransaction();
+        final String queryString = "from Disc";
+        final Query<Disc> query = entityManager.createQuery(queryString);
+        final List<Disc> result = query.list();
+        tx.commit();
+        return result;
     }
 
     /**
@@ -129,7 +149,10 @@ public final class MediaStorage {
      * @return Disc if available, null otherwise.
      */
     public Disc getDisc(String barcode) {
-        return discs.stream().filter(d -> d.getBarcode().equals(barcode)).findFirst().orElse(null);
+        Transaction tx = entityManager.beginTransaction();
+        final Disc disc = entityManager.get(Disc.class, barcode);
+        tx.commit();
+        return disc;
     }
 
     /**
@@ -139,12 +162,15 @@ public final class MediaStorage {
      * @return true if Disc was removed, false if none was available for given Barcode.
      */
     public boolean removeDisc(String barcode) {
-        return discs.removeIf(d -> d.getBarcode().equals(barcode));
+        final Disc disc = entityManager.load(Disc.class, barcode);
+        entityManager.delete(disc);
+        entityManager.flush();
+        return disc != null;
     }
 
     @Override
     public String toString() {
-        return "MediaStorage [books=" + books + ", discs=" + discs + "]";
+        return "MediaStorage [entityManager=" + entityManager + "]";
     }
 
     @Override
@@ -159,12 +185,11 @@ public final class MediaStorage {
             return false;
         }
         MediaStorage other = (MediaStorage) obj;
-        return Objects.equals(books, other.books)
-                && Objects.equals(discs, other.discs);
+        return Objects.equals(entityManager, other.entityManager);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(books, discs);
+        return Objects.hash(entityManager);
     }
 }

@@ -1,17 +1,30 @@
 package edu.hm.shareit.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
  * @since 19.04.17
  */
-public abstract class Medium {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Medium implements Serializable {
 
     /**
      * The Medium's title.
      */
     private final String title;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Integer id;
 
     /**
      * Create new Medium with given title.
@@ -55,5 +68,6 @@ public abstract class Medium {
     public int hashCode() {
         return Objects.hash(title);
     }
+
 
 }

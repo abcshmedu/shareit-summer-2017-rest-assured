@@ -1,11 +1,14 @@
 package edu.hm.shareit.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
  * @author Wolfgang Gabler, wgabler@hm.edu
  * @since 19.04.17
  */
+@Entity
 public class Disc extends Medium {
 
     /**
