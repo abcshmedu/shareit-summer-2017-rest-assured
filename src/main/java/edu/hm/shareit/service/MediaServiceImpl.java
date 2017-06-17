@@ -52,7 +52,7 @@ public class MediaServiceImpl implements MediaService {
         if (mediaStorage.containsBook(book.getIsbn())) {
             return MediaServiceResult.ISBN_ALREADY_IN_USE;
         }
-        mediaStorage.addBook(book);
+        mediaStorage.addBook(new Book(book.getTitle(), book.getAuthor(), book.getIsbn().replaceAll("-", "")));
         return MediaServiceResult.OK;
     }
 
@@ -91,6 +91,7 @@ public class MediaServiceImpl implements MediaService {
         if (!Validator.isValidIsbn(isbn)) {
             return null;
         }
+        isbn = isbn.replaceAll("-", "");
         if (mediaStorage.containsBook(isbn)) {
             return mediaStorage.getBook(isbn);
         }
@@ -119,6 +120,7 @@ public class MediaServiceImpl implements MediaService {
         if (!Validator.isValidIsbn(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
         }
+        book = new Book(book.getTitle(), book.getAuthor(), book.getIsbn().replaceAll("-", ""));
         if (mediaStorage.containsBook(book.getIsbn())) {
             mediaStorage.removeBook(book.getIsbn());
             mediaStorage.addBook(book);
