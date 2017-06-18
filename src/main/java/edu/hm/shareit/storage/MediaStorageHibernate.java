@@ -109,7 +109,7 @@ public final class MediaStorageHibernate implements MediaStorage {
         Book book = null;
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
-            final Query<Book> query = session.createQuery("from Book where isbn=''" + isbn + "''");
+            final Query<Book> query = session.createQuery("from Book where isbn='" + isbn + "'");
             final List<Book> result = query.list();
             if (result.size() == 1)
                 book = result.get(0);
@@ -214,7 +214,7 @@ public final class MediaStorageHibernate implements MediaStorage {
         Disc disc = null;
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
-            final Query<Disc> query = session.createQuery("from Disc where barcode=''" + barcode + "''");
+            final Query<Disc> query = session.createQuery("from Disc where barcode='" + barcode + "'");
             final List<Disc> result = query.list();
             if (result.size() == 1)
                 disc = result.get(0);
