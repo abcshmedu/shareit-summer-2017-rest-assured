@@ -9,6 +9,7 @@ import edu.hm.shareit.service.MediaService;
 import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -33,17 +34,9 @@ public class MediaResource {
     private final MediaService mediaService;
 
     /**
-     * Default constructor.
+     * constructor.
      */
-    public MediaResource() {
-        this.mediaService = new MediaServiceImpl();
-    }
-
-    /**
-     * Constructor to set custom MediaService.
-     *
-     * @param mediaService MediaService
-     */
+    @Inject
     public MediaResource(MediaService mediaService) {
         this.mediaService = mediaService;
     }
