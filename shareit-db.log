@@ -1,399 +1,105 @@
-/*C2*/SET SCHEMA PUBLIC
+/*C60*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C3*/SET SCHEMA PUBLIC
+/*C61*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C4*/SET SCHEMA PUBLIC
+/*C62*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C5*/SET SCHEMA PUBLIC
+/*C63*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C6*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C5*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C7*/SET SCHEMA PUBLIC
+/*C64*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C8*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C7*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C9*/SET SCHEMA PUBLIC
+/*C65*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C10*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C9*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C11*/SET SCHEMA PUBLIC
+/*C66*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C12*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C11*/INSERT INTO BOOK VALUES(1,'','','')
-COMMIT
-/*C13*/SET SCHEMA PUBLIC
+/*C67*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C14*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C13*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C15*/SET SCHEMA PUBLIC
+/*C68*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C16*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C15*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C17*/SET SCHEMA PUBLIC
+/*C69*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C18*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C17*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C19*/SET SCHEMA PUBLIC
+/*C70*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C20*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C19*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C21*/SET SCHEMA PUBLIC
+/*C71*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C22*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C21*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C23*/SET SCHEMA PUBLIC
+/*C72*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C24*/SET SCHEMA PUBLIC
+/*C73*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C25*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C24*/INSERT INTO DISC VALUES(1,'','','',0)
-COMMIT
-/*C26*/SET SCHEMA PUBLIC
+/*C74*/SET SCHEMA PUBLIC
 drop table Book if exists
 drop table Disc if exists
 drop table hibernate_sequences if exists
 create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
 create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
 create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C27*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C26*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C28*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C29*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C30*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C29*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C31*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C32*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C31*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C33*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C34*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C33*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C35*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C36*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C37*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C38*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C37*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C39*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C40*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C39*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C41*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C42*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C41*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C43*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C44*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C45*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C44*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C46*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C47*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C46*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C48*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C49*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C48*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT
-/*C50*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C51*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C52*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C51*/INSERT INTO BOOK VALUES(1,'','','')
-COMMIT
-/*C53*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C54*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C53*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C55*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C56*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C55*/INSERT INTO DISC VALUES(1,'Title','123','Director',6)
-COMMIT
-/*C57*/SET SCHEMA PUBLIC
-drop table Book if exists
-drop table Disc if exists
-drop table hibernate_sequences if exists
-create table Book (id integer not null, title varchar(255), author varchar(255), isbn varchar(255), primary key (id))
-create table Disc (id integer not null, title varchar(255), barcode varchar(255), director varchar(255), fsk integer not null, primary key (id))
-create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
-/*C58*/SET SCHEMA PUBLIC
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',1)
-DELETE FROM HIBERNATE_SEQUENCES WHERE SEQUENCE_NAME='default'
-INSERT INTO HIBERNATE_SEQUENCES VALUES('default',2)
-COMMIT
-/*C57*/INSERT INTO BOOK VALUES(1,'Title','Author','123')
-COMMIT

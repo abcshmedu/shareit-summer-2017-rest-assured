@@ -2,12 +2,14 @@ package edu.hm.shareit.storage;
 
 import edu.hm.shareit.model.Book;
 import edu.hm.shareit.model.Disc;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,14 +36,13 @@ public final class MediaStorageHibernate implements MediaStorage {
     /**
      * Hibernate Session.
      */
-    private final Session entityManager;
+    private final SessionFactory sessionFactory;
 
     /**
      * Create new MediaStorageImpl.
      */
     public MediaStorageHibernate() {
-        final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        this.entityManager = sessionFactory.openSession();
+        this.sessionFactory = new Configuration().configure().buildSessionFactory();
     }
 
     /**
@@ -51,9 +52,16 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public void addBook(Book book) {
-        Transaction tx = entityManager.beginTransaction();
-        entityManager.persist(book);
-        tx.commit();
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.persist(book);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
     }
 
     /**
@@ -74,12 +82,19 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public List<Book> getBooks() {
-        Transaction tx = entityManager.beginTransaction();
-        final String queryString = "from Book";
-        final Query<Book> query = entityManager.createQuery(queryString);
-        final List<Book> result = query.list();
-        tx.commit();
-        return result;
+        Transaction tx = null;
+        List<Book> books = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            final Query<Book> query = session.createQuery("from Book");
+            books = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        return books == null ? new LinkedList<>() : books;
     }
 
     /**
@@ -90,9 +105,20 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public Book getBook(String isbn) {
-        Transaction tx = entityManager.beginTransaction();
-        final Book book = entityManager.get(Book.class, isbn);
-        tx.commit();
+        Transaction tx = null;
+        Book book = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            final Query<Book> query = session.createQuery("from Book where isbn=''" + isbn + "''");
+            final List<Book> result = query.list();
+            if (result.size() == 1)
+                book = result.get(0);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
         return book;
     }
 
@@ -104,10 +130,22 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public boolean removeBook(String isbn) {
-        final Book book = entityManager.load(Book.class, isbn);
-        entityManager.delete(book);
-        entityManager.flush();
-        return book != null;
+        Transaction tx = null;
+        final Book book = getBook(isbn);
+        if (book == null) {
+            return false;
+        }
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.delete(book);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            return false;
+        }
+        return true;
     }
 
     // Discs
@@ -119,9 +157,16 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public void addDisc(Disc disc) {
-        Transaction tx = entityManager.beginTransaction();
-        entityManager.persist(disc);
-        tx.commit();
+        Transaction tx = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.persist(disc);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
     }
 
     /**
@@ -142,12 +187,19 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public List<Disc> getDiscs() {
-        Transaction tx = entityManager.beginTransaction();
-        final String queryString = "from Disc";
-        final Query<Disc> query = entityManager.createQuery(queryString);
-        final List<Disc> result = query.list();
-        tx.commit();
-        return result;
+        Transaction tx = null;
+        List<Disc> discs = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            final Query<Disc> query = session.createQuery("from Disc");
+            discs = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        return discs == null ? new LinkedList<>() : discs;
     }
 
     /**
@@ -158,9 +210,20 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public Disc getDisc(String barcode) {
-        Transaction tx = entityManager.beginTransaction();
-        final Disc disc = entityManager.get(Disc.class, barcode);
-        tx.commit();
+        Transaction tx = null;
+        Disc disc = null;
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            final Query<Disc> query = session.createQuery("from Disc where barcode=''" + barcode + "''");
+            final List<Disc> result = query.list();
+            if (result.size() == 1)
+                disc = result.get(0);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
         return disc;
     }
 
@@ -172,15 +235,27 @@ public final class MediaStorageHibernate implements MediaStorage {
      */
     @Override
     public boolean removeDisc(String barcode) {
-        final Disc disc = entityManager.load(Disc.class, barcode);
-        entityManager.delete(disc);
-        entityManager.flush();
-        return disc != null;
+        Transaction tx = null;
+        final Disc disc = getDisc(barcode);
+        if (disc == null) {
+            return false;
+        }
+        try (Session session = sessionFactory.openSession()) {
+            tx = session.beginTransaction();
+            session.delete(disc);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "MediaStorageImpl [entityManager=" + entityManager + "]";
+        return "MediaStorageImpl [sessionFactory=" + sessionFactory + "]";
     }
 
     @Override
@@ -195,11 +270,11 @@ public final class MediaStorageHibernate implements MediaStorage {
             return false;
         }
         MediaStorageHibernate other = (MediaStorageHibernate) obj;
-        return Objects.equals(entityManager, other.entityManager);
+        return Objects.equals(sessionFactory, other.sessionFactory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(entityManager);
+        return Objects.hash(sessionFactory);
     }
 }
