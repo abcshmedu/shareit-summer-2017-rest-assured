@@ -22,22 +22,12 @@ public class MediaStorageHibernateTest {
     private final Disc stdDisc = new Disc("Title", "123", "Director", 6);
 
     /**
-     * Test toString method.
-     */
-    @Test
-    public void toStringTest() {
-        MediaStorage mediaStorage = new MediaStorageHibernate();
-        assertEquals("MediaStorageImpl [books=[], discs=[]]", mediaStorage.toString());
-    }
-
-    /**
      * Test addBook method.
      */
     @Test
     public void addBookTest() {
         MediaStorage mediaStorage = addStdBook();
-        assertEquals("MediaStorageImpl [books=[Book{title='Title', author='Author', isbn='123'}], discs=[]]",
-                mediaStorage.toString());
+        assertEquals(true, mediaStorage.containsBook(stdBook.getIsbn()));
     }
 
     /**
@@ -97,7 +87,7 @@ public class MediaStorageHibernateTest {
     public void removeBookTest() {
         MediaStorage mediaStorage = addStdBook();
         assertEquals(true, mediaStorage.removeBook("123"));
-        assertEquals("MediaStorageImpl [books=[], discs=[]]", mediaStorage.toString());
+        assertEquals(false, mediaStorage.containsBook("123"));
     }
 
     /**
@@ -108,7 +98,8 @@ public class MediaStorageHibernateTest {
         MediaStorage mediaStorage = addStdBook();
         mediaStorage.addBook(new Book("SecondTitle", "SecondAuthor", "000"));
         assertEquals(true, mediaStorage.removeBook("123"));
-        assertEquals("MediaStorageImpl [books=[Book{title='SecondTitle', author='SecondAuthor', isbn='000'}], discs=[]]", mediaStorage.toString());
+        assertEquals(false, mediaStorage.containsBook("123"));
+        assertEquals(true, mediaStorage.containsBook("000"));
     }
 
     /**
@@ -118,7 +109,7 @@ public class MediaStorageHibernateTest {
     public void removeBookNotAvailableTest() {
         MediaStorage mediaStorage = addStdBook();
         assertEquals(false, mediaStorage.removeBook("12345"));
-        assertEquals("MediaStorageImpl [books=[Book{title='Title', author='Author', isbn='123'}], discs=[]]", mediaStorage.toString());
+        assertEquals(true, mediaStorage.containsBook(stdBook.getIsbn()));
     }
 
     /**
@@ -153,8 +144,7 @@ public class MediaStorageHibernateTest {
     @Test
     public void addDiscTest() {
         MediaStorage mediaStorage = addStdDisc();
-        assertEquals("MediaStorageImpl [books=[], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]",
-                mediaStorage.toString());
+        assertEquals(true, mediaStorage.containsDisc(stdDisc.getBarcode()));
     }
 
     /**
@@ -214,7 +204,7 @@ public class MediaStorageHibernateTest {
     public void removeDiscTest() {
         MediaStorage mediaStorage = addStdDisc();
         assertEquals(true, mediaStorage.removeDisc("123"));
-        assertEquals("MediaStorageImpl [books=[], discs=[]]", mediaStorage.toString());
+        assertEquals(false, mediaStorage.containsDisc("123"));
     }
 
     /**
@@ -225,7 +215,8 @@ public class MediaStorageHibernateTest {
         MediaStorage mediaStorage = addStdDisc();
         mediaStorage.addDisc(new Disc("OtherDisc", "12345", "OtherDirector", 0));
         assertEquals(true, mediaStorage.removeDisc("123"));
-        assertEquals("MediaStorageImpl [books=[], discs=[Disc{title='OtherDisc', barcode='12345', director='OtherDirector', fsk=0}]]", mediaStorage.toString());
+        assertEquals(false, mediaStorage.containsDisc("123"));
+        assertEquals(true, mediaStorage.containsDisc("12345"));
     }
 
     /**
@@ -235,7 +226,7 @@ public class MediaStorageHibernateTest {
     public void removeDiscNotAvailableTest() {
         MediaStorage mediaStorage = addStdDisc();
         assertEquals(false, mediaStorage.removeDisc("12345"));
-        assertEquals("MediaStorageImpl [books=[], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", mediaStorage.toString());
+        assertEquals(true, mediaStorage.containsDisc("123"));
     }
 
     /**
@@ -245,7 +236,8 @@ public class MediaStorageHibernateTest {
     public void addBookAndDiscTest() {
         MediaStorage mediaStorage = addStdBook();
         mediaStorage.addDisc(stdDisc);
-        assertEquals("MediaStorageImpl [books=[Book{title='Title', author='Author', isbn='123'}], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", mediaStorage.toString());
+        assertEquals(true, mediaStorage.containsBook(stdBook.getIsbn()));
+        assertEquals(true, mediaStorage.containsDisc(stdDisc.getBarcode()));
     }
 
     /**
@@ -313,30 +305,5 @@ public class MediaStorageHibernateTest {
         storage2.addDisc(stdDisc);
         storage2.addBook(stdBook);
         assertEquals(false, storage.equals(storage2));
-    }
-
-    /**
-     * Test equals method.
-     */
-    @Test
-    public void eqalsTest() {
-        MediaStorage storage = new MediaStorageHibernate();
-        storage.addBook(stdBook);
-        storage.addDisc(stdDisc);
-        MediaStorage storage2 = new MediaStorageHibernate();
-        storage2.addDisc(stdDisc);
-        storage2.addBook(stdBook);
-        assertEquals(true, storage.equals(storage2));
-    }
-
-    /**
-     * Test hashCode method.
-     * Equal objects have same hashCode.
-     */
-    @Test
-    public void hashCodeEqualsTest() {
-        MediaStorage storage = new MediaStorageHibernate();
-        MediaStorage storage2 = new MediaStorageHibernate();
-        assertEquals(storage.hashCode(), storage2.hashCode());
     }
 }

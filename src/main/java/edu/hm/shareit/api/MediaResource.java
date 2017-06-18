@@ -6,7 +6,6 @@ import edu.hm.shareit.model.Book;
 import edu.hm.shareit.model.Disc;
 import edu.hm.shareit.model.Medium;
 import edu.hm.shareit.service.MediaService;
-import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;
 
 import javax.inject.Inject;
@@ -35,6 +34,7 @@ public class MediaResource {
 
     /**
      * constructor.
+     * @param mediaService MediaService.
      */
     @Inject
     public MediaResource(MediaService mediaService) {
