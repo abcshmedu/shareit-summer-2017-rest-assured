@@ -50,7 +50,7 @@ public class MediaServiceImpl implements MediaService {
         if (!Validator.isValidIsbn(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
         }
-        if (mediaStorage.containsBook(book.getIsbn())) {
+        if (mediaStorage.containsBook(book.getIsbn().replaceAll("-", ""))) {
             return MediaServiceResult.ISBN_ALREADY_IN_USE;
         }
         mediaStorage.addBook(new Book(book.getTitle(), book.getAuthor(), book.getIsbn().replaceAll("-", "")));

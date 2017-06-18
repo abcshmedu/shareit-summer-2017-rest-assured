@@ -25,8 +25,8 @@ import edu.hm.shareit.storage.MediaStorageImpl;
  */
 public class MediaResourceTest {
 
-    private final Book friedhof = new Book("Friedhof der Kuscheltiere", "Stephen King", "978-3453435797");
-    private final Book achtnacht = new Book("AchtNacht", "Sebastian Fitzek", "978-3426521083");
+    private final Book friedhof = new Book("Friedhof der Kuscheltiere", "Stephen King", "9783453435797");
+    private final Book achtnacht = new Book("AchtNacht", "Sebastian Fitzek", "9783426521083");
     private final Disc disc1 = new Disc("Disc Title", "7501031311309", "Director", 0);
     private final Disc disc2 = new Disc("Other Disc", "7501054530107", "Other Director", 6);
 

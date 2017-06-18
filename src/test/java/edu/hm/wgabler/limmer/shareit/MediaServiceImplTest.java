@@ -18,9 +18,9 @@ import edu.hm.shareit.service.MediaServiceResult;
  */
 public class MediaServiceImplTest {
 
-    private final Book stdBook = new Book("Book Title", "Author", "978-3426521083");
+    private final Book stdBook = new Book("Book Title", "Author", "9783426521083");
     private final Disc stdDisc = new Disc("Disc Title", "7501031311309", "Director", 0);
-    private final Book otherBook = new Book("Other Book", "Other Author", "978-3453435797");
+    private final Book otherBook = new Book("Other Book", "Other Author", "9783453435797");
     private final Disc otherDisc = new Disc("Other Disc", "7501054530107", "Other Director", 6);
     
     /**
