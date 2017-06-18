@@ -15,6 +15,10 @@
 		  <param-name>jersey.config.server.provider.packages</param-name>  
 	     <param-value>edu.hm</param-value>
 	     </init-param>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>edu.hm.ShareItApplication</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -41,4 +45,10 @@
 		<servlet-name>Media Resource</servlet-name>
 		<url-pattern>/shareit/*</url-pattern>
 	</servlet-mapping>
+	
+	<listener>
+		<listener-class>
+			edu.hm.ShareitServletContextListener
+		</listener-class>
+	</listener>
 </web-app>
