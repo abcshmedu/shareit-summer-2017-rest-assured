@@ -17,7 +17,7 @@ import edu.hm.shareit.model.User;
 import edu.hm.shareit.service.MediaService;
 import edu.hm.shareit.service.MediaServiceImpl;
 import edu.hm.shareit.service.MediaServiceResult;
-import edu.hm.shareit.storage.MediaStorage;
+import edu.hm.shareit.storage.MediaStorageImpl;
 
 /**
  * MediaResourceTestTest.
@@ -30,7 +30,7 @@ public class MediaResourceTest {
     private final Disc disc1 = new Disc("Disc Title", "7501031311309", "Director", 0);
     private final Disc disc2 = new Disc("Other Disc", "7501054530107", "Other Director", 6);
 
-    private final MediaService mediaService = new MediaServiceImpl(new MediaStorage());
+    private final MediaService mediaService = new MediaServiceImpl(new MediaStorageImpl());
     
     private final String token = new UserResource().login(new User("bob", "42")).getEntity().toString();
 
