@@ -1,5 +1,7 @@
 package edu.hm.shareit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,7 @@ import java.util.Objects;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@JsonIgnoreProperties({"id"})
 public abstract class Medium implements Serializable {
 
     /**

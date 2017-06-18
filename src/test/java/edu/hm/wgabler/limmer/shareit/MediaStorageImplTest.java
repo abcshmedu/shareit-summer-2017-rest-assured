@@ -8,14 +8,15 @@ import java.util.List;
 import edu.hm.shareit.model.Book;
 import edu.hm.shareit.model.Disc;
 import edu.hm.shareit.storage.MediaStorage;
+import edu.hm.shareit.storage.MediaStorageImpl;
 
 import org.junit.Test;
 
 /**
- * MediaStorageTest.
+ * MediaStorageImplTest.
  * @author Andrea Limmer, limmer@hm.edu
  */
-public class MediaStorageTest {
+public class MediaStorageImplTest {
 
     private final Book stdBook = new Book("Title", "Author", "123");
     private final Disc stdDisc = new Disc("Title", "123", "Director", 6);
@@ -25,8 +26,8 @@ public class MediaStorageTest {
      */
     @Test
     public void toStringTest() {
-        MediaStorage mediaStorage = new MediaStorage();
-        assertEquals("MediaStorage [books=[], discs=[]]", mediaStorage.toString());
+        MediaStorage mediaStorage = new MediaStorageImpl();
+        assertEquals("MediaStorageImpl [books=[], discs=[]]", mediaStorage.toString());
     }
 
     /**
@@ -35,7 +36,7 @@ public class MediaStorageTest {
     @Test
     public void addBookTest() {
         MediaStorage mediaStorage = addStdBook();
-        assertEquals("MediaStorage [books=[Book{title='Title', author='Author', isbn='123'}], discs=[]]", 
+        assertEquals("MediaStorageImpl [books=[Book{title='Title', author='Author', isbn='123'}], discs=[]]",
                 mediaStorage.toString());
     }
     
@@ -96,7 +97,7 @@ public class MediaStorageTest {
     public void removeBookTest() {
         MediaStorage mediaStorage = addStdBook();
         assertEquals(true, mediaStorage.removeBook("123"));
-        assertEquals("MediaStorage [books=[], discs=[]]", mediaStorage.toString());
+        assertEquals("MediaStorageImpl [books=[], discs=[]]", mediaStorage.toString());
     }
     
     /**
@@ -107,7 +108,7 @@ public class MediaStorageTest {
         MediaStorage mediaStorage = addStdBook();
         mediaStorage.addBook(new Book("SecondTitle", "SecondAuthor", "000"));
         assertEquals(true, mediaStorage.removeBook("123"));
-        assertEquals("MediaStorage [books=[Book{title='SecondTitle', author='SecondAuthor', isbn='000'}], discs=[]]", mediaStorage.toString());
+        assertEquals("MediaStorageImpl [books=[Book{title='SecondTitle', author='SecondAuthor', isbn='000'}], discs=[]]", mediaStorage.toString());
     }
     
     /**
@@ -117,7 +118,7 @@ public class MediaStorageTest {
     public void removeBookNotAvailableTest() {
         MediaStorage mediaStorage = addStdBook();
         assertEquals(false, mediaStorage.removeBook("12345"));
-        assertEquals("MediaStorage [books=[Book{title='Title', author='Author', isbn='123'}], discs=[]]", mediaStorage.toString());
+        assertEquals("MediaStorageImpl [books=[Book{title='Title', author='Author', isbn='123'}], discs=[]]", mediaStorage.toString());
     }
     
     /**
@@ -126,7 +127,7 @@ public class MediaStorageTest {
      * @return mediaStorage
      */
     private MediaStorage addStdBook() {
-        MediaStorage mediaStorage = new MediaStorage();
+        MediaStorage mediaStorage = new MediaStorageImpl();
         mediaStorage.addBook(stdBook);
         return mediaStorage;
     }
@@ -139,7 +140,7 @@ public class MediaStorageTest {
      * @return mediaStorage
      */
     private MediaStorage addStdDisc() {
-        MediaStorage mediaStorage = new MediaStorage();
+        MediaStorage mediaStorage = new MediaStorageImpl();
         mediaStorage.addDisc(stdDisc);
         return mediaStorage;
     }
@@ -150,7 +151,7 @@ public class MediaStorageTest {
     @Test
     public void addDiscTest() {
         MediaStorage mediaStorage = addStdDisc();
-        assertEquals("MediaStorage [books=[], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", 
+        assertEquals("MediaStorageImpl [books=[], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]",
                 mediaStorage.toString());
     }
     
@@ -211,7 +212,7 @@ public class MediaStorageTest {
     public void removeDiscTest() {
         MediaStorage mediaStorage = addStdDisc();
         assertEquals(true, mediaStorage.removeDisc("123"));
-        assertEquals("MediaStorage [books=[], discs=[]]", mediaStorage.toString());
+        assertEquals("MediaStorageImpl [books=[], discs=[]]", mediaStorage.toString());
     }
     
     /**
@@ -222,7 +223,7 @@ public class MediaStorageTest {
         MediaStorage mediaStorage = addStdDisc();
         mediaStorage.addDisc(new Disc("OtherDisc", "12345", "OtherDirector", 0));
         assertEquals(true, mediaStorage.removeDisc("123"));
-        assertEquals("MediaStorage [books=[], discs=[Disc{title='OtherDisc', barcode='12345', director='OtherDirector', fsk=0}]]", mediaStorage.toString());
+        assertEquals("MediaStorageImpl [books=[], discs=[Disc{title='OtherDisc', barcode='12345', director='OtherDirector', fsk=0}]]", mediaStorage.toString());
     }
     
     /**
@@ -232,7 +233,7 @@ public class MediaStorageTest {
     public void removeDiscNotAvailableTest() {
         MediaStorage mediaStorage = addStdDisc();
         assertEquals(false, mediaStorage.removeDisc("12345"));
-        assertEquals("MediaStorage [books=[], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", mediaStorage.toString());
+        assertEquals("MediaStorageImpl [books=[], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", mediaStorage.toString());
     }
     
     /**
@@ -242,7 +243,7 @@ public class MediaStorageTest {
     public void addBookAndDiscTest() {
         MediaStorage mediaStorage = addStdBook();
         mediaStorage.addDisc(stdDisc);
-        assertEquals("MediaStorage [books=[Book{title='Title', author='Author', isbn='123'}], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", mediaStorage.toString());
+        assertEquals("MediaStorageImpl [books=[Book{title='Title', author='Author', isbn='123'}], discs=[Disc{title='Title', barcode='123', director='Director', fsk=6}]]", mediaStorage.toString());
     }
     
     /**
@@ -251,7 +252,7 @@ public class MediaStorageTest {
      */
     @Test
     public void notEqualsNullTest() {
-        assertEquals(false, new MediaStorage().equals(null));
+        assertEquals(false, new MediaStorageImpl().equals(null));
     }
     
     /**
@@ -260,7 +261,7 @@ public class MediaStorageTest {
      */
     @Test
     public void equalsItselfTest() {
-        MediaStorage storage = new MediaStorage();
+        MediaStorage storage = new MediaStorageImpl();
         assertEquals(true, storage.equals(storage));
     }
     
@@ -270,7 +271,7 @@ public class MediaStorageTest {
      */
     @Test
     public void notEqualsOtherClassTest() {
-        MediaStorage storage = new MediaStorage();
+        MediaStorage storage = new MediaStorageImpl();
         assertEquals(false, storage.equals(new String()));
     }
     
@@ -280,8 +281,8 @@ public class MediaStorageTest {
      */
     @Test
     public void notEqualsOtherBooksTest() {
-        MediaStorage storage = new MediaStorage();
-        MediaStorage storage2 = new MediaStorage();
+        MediaStorage storage = new MediaStorageImpl();
+        MediaStorage storage2 = new MediaStorageImpl();
         storage2.addBook(new Book());
         assertEquals(false, storage.equals(storage2));
     }
@@ -292,8 +293,8 @@ public class MediaStorageTest {
      */
     @Test
     public void notEqualsOtherDiscsTest() {
-        MediaStorage storage = new MediaStorage();
-        MediaStorage storage2 = new MediaStorage();
+        MediaStorage storage = new MediaStorageImpl();
+        MediaStorage storage2 = new MediaStorageImpl();
         storage2.addDisc(new Disc());
         assertEquals(false, storage.equals(storage2));
     }
@@ -304,9 +305,9 @@ public class MediaStorageTest {
      */
     @Test
     public void notEqualsOtherBooksAndDiscsTest() {
-        MediaStorage storage = new MediaStorage();
+        MediaStorage storage = new MediaStorageImpl();
         storage.addBook(new Book());
-        MediaStorage storage2 = new MediaStorage();
+        MediaStorage storage2 = new MediaStorageImpl();
         storage2.addDisc(stdDisc);
         storage2.addBook(stdBook);
         assertEquals(false, storage.equals(storage2));
@@ -317,10 +318,10 @@ public class MediaStorageTest {
      */
     @Test
     public void eqalsTest() {
-        MediaStorage storage = new MediaStorage();
+        MediaStorage storage = new MediaStorageImpl();
         storage.addBook(stdBook);
         storage.addDisc(stdDisc);
-        MediaStorage storage2 = new MediaStorage();
+        MediaStorage storage2 = new MediaStorageImpl();
         storage2.addDisc(stdDisc);
         storage2.addBook(stdBook);
         assertEquals(true, storage.equals(storage2));
@@ -332,8 +333,8 @@ public class MediaStorageTest {
      */
     @Test 
     public void hashCodeEqualsTest() {
-        MediaStorage storage = new MediaStorage();
-        MediaStorage storage2 = new MediaStorage();
+        MediaStorage storage = new MediaStorageImpl();
+        MediaStorage storage2 = new MediaStorageImpl();
         assertEquals(storage.hashCode(), storage2.hashCode());
     }
 }

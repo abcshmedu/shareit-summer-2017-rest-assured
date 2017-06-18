@@ -12,6 +12,7 @@ import edu.hm.shareit.model.Book;
 import edu.hm.shareit.model.Disc;
 import edu.hm.shareit.model.Medium;
 import edu.hm.shareit.storage.MediaStorage;
+import edu.hm.shareit.storage.MediaStorageImpl;
 import edu.hm.shareit.util.Validator;
 
 /**
@@ -27,12 +28,12 @@ public class MediaServiceImpl implements MediaService {
      * Standard constructor.
      */
     public MediaServiceImpl() {
-        this.mediaStorage = MediaStorage.getDefault();
+        this.mediaStorage = MediaStorageImpl.getDefault();
     }
     
     /**
-     * Constructor to set custom MediaStorage.
-     * @param mediaStorage MediaStorage.
+     * Constructor to set custom MediaStorageImpl.
+     * @param mediaStorage MediaStorageImpl.
      */
     public MediaServiceImpl(MediaStorage mediaStorage) {
         this.mediaStorage = mediaStorage;
